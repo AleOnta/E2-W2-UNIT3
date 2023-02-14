@@ -85,7 +85,7 @@
 }
 
 .commentContainer.one {
-  width: 72%;
+  width: 66%;
 }
 
 .commentElement {
@@ -101,7 +101,7 @@ label {
   margin-bottom: 0.4em;
 }
 
-.form-control {
+.form-control.comment {
   font-size: 0.6em;
   padding: 3px;
 }
@@ -122,10 +122,8 @@ label {
 }
 
 .deleteButton {
-  padding: 4px 0;
+  padding: 5px 10px;
   font-size: 0.8em;
-  height: 5%;
-  width: 15%;
 }
 
 .textComment {
@@ -133,4 +131,8 @@ label {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.textRate {
+  margin-left: 20%;
 }

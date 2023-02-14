@@ -36,6 +36,7 @@ const CommentAdd = (props) => {
         <Form.Label>Your comment</Form.Label>
         <Form.Control
           type="text"
+          className="comment"
           placeholder="comment here"
           value={comment}
           onChange={(e) => {
@@ -47,7 +48,7 @@ const CommentAdd = (props) => {
         <Form.Label>Comment rate</Form.Label>
         <input
           type="number"
-          className="form-control"
+          className="form-control comment"
           value={rate}
           onChange={(e) => {
             setRate(e.target.value);

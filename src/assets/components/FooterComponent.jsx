@@ -24,7 +24,7 @@ const FooterComponent = (props) => {
           </form>
         </section>
       </div>
-      <div className="text-center p-3">
+      <div className="text-center pb-3">
         © 2023 Copyright:
         <a className="text-dark" href="https://mdbootstrap.com/">
           MDBootstrap.com
