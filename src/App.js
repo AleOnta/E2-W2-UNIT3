@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
+import NavComponent from "./assets/components/NavComponent";
+import JumbotronComponent from "./assets/components/Jumbotron";
+import BookList from "./assets/components/BookList";
+import FooterComponent from "./assets/components/FooterComponent";
+import { Container } from "react-bootstrap";
+import fantasy from "./assets/data/fantasy.json";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavComponent />
+      <Container>
+        <JumbotronComponent
+          title="Welcome to my library"
+          content="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quibusdam sint maiores debitis suscipit reprehenderit distinctio!"
+        />
+
+        <BookList props={fantasy} />
+      </Container>
+      <FooterComponent placeholder="email address" />
+    </>
   );
 }
 

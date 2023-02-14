@@ -36,3 +36,96 @@
     transform: rotate(360deg);
   }
 }
+
+.cardContainer {
+  position: relative;
+}
+
+.cardImage {
+  width: 100%;
+  height: 50%;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardCategory {
+  font-size: 0.8rem;
+}
+
+.cardCategory span {
+  font-weight: 700;
+}
+
+.cardPrice {
+  width: 40%;
+  position: absolute;
+  bottom: 15px;
+}
+
+.active {
+  border: 2px solid coral;
+  transform: scale(1.02);
+  transition: 0.3s;
+}
+
+.inactive {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  transform: scale(1);
+  transition: 0.3s;
+}
+
+.commentContainer {
+  width: 80%;
+}
+
+.commentElement {
+  padding: 3px 0;
+  font-size: 0.7em;
+}
+
+label {
+  font-size: 0.7em;
+  padding: 0 5px;
+  background-color: lightgray;
+  border-radius: 10px;
+  margin-bottom: 0.4em;
+}
+
+.form-control {
+  font-size: 0.6em;
+  padding: 3px;
+}
+
+.inputComment {
+  width: 65%;
+  font-size: 0.6em;
+}
+
+.commentButton {
+  border-radius: 15px;
+  padding: 7px 15px;
+  border: none;
+  background-color: #282c34;
+  color: white;
+  margin-bottom: 1em;
+  font-size: 0.7em;
+}
+
+.deleteButton {
+  font-size: 0.6em;
+  height: 5%;
+  width: 25%;
+}
+
+.textComment {
+  width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
