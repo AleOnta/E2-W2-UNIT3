@@ -14,6 +14,7 @@ const BookList = (props) => {
   const asinRevealer = (asin) => {
     const actualAsin = asin;
     setCurrentElement(actualAsin);
+    console.log(currentElement);
   };
 
   return (

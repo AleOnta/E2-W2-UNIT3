@@ -4,7 +4,6 @@ import { Form } from "react-bootstrap";
 const CommentAdd = (props) => {
   const [comment, setComment] = useState("");
   const [rate, setRate] = useState("");
-  const [elementId, setElementId] = useState(props.asin);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
