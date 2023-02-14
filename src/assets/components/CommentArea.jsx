@@ -1,13 +1,11 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import CommentList from "./CommentList";
 import CommentAdd from "./CommentAdd";
 
-class CommentArea extends Component {
-  state = {
-    commentRes: [],
-  };
+const CommentArea = (props) => {
+  const [commentRes, setCommentRes] = useState([]);
 
-  retrieveComment = async (asin) => {
+  const retrieveComment = async (asin) => {
     try {
       const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${asin}`, {
         headers: {
@@ -19,9 +17,7 @@ class CommentArea extends Component {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        this.setState({
-          commentRes: data,
-        });
+        setCommentRes(data);
       } else {
         alert("errore nel caricamento dei contenuti");
       }
@@ -30,20 +26,16 @@ class CommentArea extends Component {
     }
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.asin !== this.props.asin) {
-      this.retrieveComment(this.props.asin);
-    }
-  }
+  useEffect(() => {
+    retrieveComment(props.asin);
+  }, [props.asin]);
 
-  render() {
-    return (
-      <>
-        <CommentList data={this.state.commentRes} />
-        <CommentAdd elementID={this.props.asin} />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <CommentList data={commentRes} />
+      <CommentAdd asin={props.asin} />
+    </>
+  );
+};
 
 export default CommentArea;

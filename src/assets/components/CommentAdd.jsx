@@ -1,20 +1,18 @@
-import { Component } from "react";
+import { useState } from "react";
 import { Form } from "react-bootstrap";
 
-class CommentAdd extends Component {
-  state = {
-    comment: "",
-    rate: "",
-    elementId: this.props.elementID,
-  };
+const CommentAdd = (props) => {
+  const [comment, setComment] = useState("");
+  const [rate, setRate] = useState("");
+  const [elementId, setElementId] = useState(props.asin);
 
-  handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
         method: "POST",
-        body: JSON.stringify(this.state),
+        body: JSON.stringify({ comment: comment, rate: rate, elementId: props.asin }),
         headers: {
           "Content-Type": "application/json",
           Authorization:
@@ -24,9 +22,8 @@ class CommentAdd extends Component {
 
       if (response.ok) {
         const parsedBody = await response.json();
-        alert("La tua richiesta è andata a buon fine, la risorsa è stata creata con id " + parsedBody._id);
+        alert("La richiesta è andata a buon fine, il commento è stato aggiunto con id " + parsedBody._id);
       } else {
-        console.log(response, this.state);
         alert("qualcosa è andato storto con la richiesta");
       }
     } catch (err) {
@@ -34,45 +31,40 @@ class CommentAdd extends Component {
     }
   };
 
-  render() {
-    return (
-      <Form>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Your comment</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="comment here"
-            value={this.state.comment}
-            onChange={(e) => {
-              this.setState({
-                comment: e.target.value,
-              });
-            }}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="value">
-          <Form.Label>Comment rate</Form.Label>
-          <input
-            type="number"
-            className="form-control"
-            value={this.state.rate}
-            onChange={(e) => {
-              this.setState({
-                rate: e.target.value,
-              });
-            }}
-          />
-        </Form.Group>
-        <button
-          className="commentButton"
-          onClick={(e) => {
-            this.handleSubmit(e);
+  return (
+    <Form>
+      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+        <Form.Label>Your comment</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="comment here"
+          value={comment}
+          onChange={(e) => {
+            setComment(e.target.value);
           }}
-        >
-          Aggiungi
-        </button>
-      </Form>
-    );
-  }
-}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="value">
+        <Form.Label>Comment rate</Form.Label>
+        <input
+          type="number"
+          className="form-control"
+          value={rate}
+          onChange={(e) => {
+            setRate(e.target.value);
+          }}
+        />
+      </Form.Group>
+      <button
+        className="commentButton"
+        onClick={(e) => {
+          handleSubmit(e);
+        }}
+      >
+        Aggiungi
+      </button>
+    </Form>
+  );
+};
+
 export default CommentAdd;
