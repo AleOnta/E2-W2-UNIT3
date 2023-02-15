@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 
 const CommentAdd = (props) => {
-  const [comment, setComment] = useState("");
-  const [rate, setRate] = useState("");
+  const [toPost, setToPost] = useState({
+    comment: "",
+    rate: "",
+    elementId: "",
+  });
+
+  const toPostModify = (property, value) => {
+    setToPost({ ...toPost, [property]: value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -11,7 +18,7 @@ const CommentAdd = (props) => {
     try {
       const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
         method: "POST",
-        body: JSON.stringify({ comment: comment, rate: rate, elementId: props.asin }),
+        body: JSON.stringify(toPost),
         headers: {
           "Content-Type": "application/json",
           Authorization:
@@ -30,6 +37,11 @@ const CommentAdd = (props) => {
     }
   };
 
+  useEffect(() => {
+    toPostModify("elementId", props.asin);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.asin]);
+
   return (
     <Form>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -38,9 +50,9 @@ const CommentAdd = (props) => {
           type="text"
           className="comment"
           placeholder="comment here"
-          value={comment}
+          value={toPost.comment}
           onChange={(e) => {
-            setComment(e.target.value);
+            toPostModify("comment", e.target.value);
           }}
         />
       </Form.Group>
@@ -49,9 +61,9 @@ const CommentAdd = (props) => {
         <input
           type="number"
           className="form-control comment"
-          value={rate}
+          value={toPost.rate}
           onChange={(e) => {
-            setRate(e.target.value);
+            toPostModify("rate", e.target.value);
           }}
         />
       </Form.Group>

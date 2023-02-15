@@ -35,7 +35,7 @@ const CommentArea = (props) => {
 
   return (
     <>
-      <CommentList data={commentRes} />
+      <CommentList data={commentRes} load={props.load} loadSet={props.loadSet} />
       <CommentAdd asin={props.asin} />
     </>
   );

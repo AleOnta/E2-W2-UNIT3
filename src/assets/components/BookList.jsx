@@ -6,6 +6,11 @@ import SingleBookAsClass from "./SingleBookAsClass";
 const BookList = (props) => {
   const [query, setQuery] = useState("");
   const [currentElement, setCurrentElement] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  // const switchLoad = () => {
+  //   setIsLoading(false)
+  // }
 
   const filterBookList = (e) => {
     setQuery(e.target.value);
@@ -50,7 +55,7 @@ const BookList = (props) => {
           </Row>
         </Col>
         <Col xs={4}>
-          <CommentArea asin={currentElement} />
+          <CommentArea asin={currentElement} load={isLoading} loadSet={setIsLoading} />
         </Col>
       </Row>
     </>

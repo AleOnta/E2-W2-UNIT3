@@ -1,9 +1,7 @@
-import { ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { ListGroup, ListGroupItem, Button, Spinner } from "react-bootstrap";
 
 const CommentList = (props) => {
   const commentDelete = async (toDelete) => {
-    console.log(toDelete);
-
     try {
       const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${toDelete}`, {
         method: "DELETE",
@@ -15,6 +13,7 @@ const CommentList = (props) => {
 
       if (response.ok) {
         alert(`Il commento con ID: ${toDelete}, è stato eliminato con successo.`);
+        props.loadSet(false);
       } else {
         console.log("qualche altro errore");
       }
@@ -35,6 +34,17 @@ const CommentList = (props) => {
           </span>
         </div>
       </ListGroupItem>
+      {/* {props.load === true ? (
+        <div className="d-flex justify-content-around align-items-center my-4">
+          <Spinner animation="grow" size="sm" />
+          <Spinner animation="grow" size="sm" />
+          <Spinner animation="grow" size="sm" />
+          <Spinner animation="grow" size="sm" />
+        </div>
+      ) : (
+        <></>
+      )} */}
+
       {props.data.map((comment, index) => {
         return (
           <ListGroupItem className="commentElement d-flex justify-content-between" key={index}>
